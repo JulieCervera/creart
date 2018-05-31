@@ -7,6 +7,7 @@ export class AuthService {
 
   private _registerUrl = 'http://localhost:3000/api/register';
   private _loginUrl = 'http://localhost:3000/api/login';
+  private _accountUrl = 'http://localhost:3000/api/account';
 
   constructor(private http: HttpClient,
               private _router: Router) { }
@@ -30,6 +31,15 @@ export class AuthService {
 
   getToken() {
     return localStorage.getItem('local_token');
+  }
+
+
+  deleteAccount(id) {
+    return this.http.delete(this._accountUrl+'/'+id); 
+  }
+
+  editAccount(user) {
+    return this.http.put(this._accountUrl,user);
   }
 }
 

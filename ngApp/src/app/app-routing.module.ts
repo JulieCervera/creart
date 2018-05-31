@@ -5,6 +5,8 @@ import { LoginComponent } from './login/login.component';
 import { ArtsComponent } from './arts/arts.component';
 import { UserComponent } from './user/user.component';
 import { ArtworkComponent } from './artwork/artwork.component';
+import { ArtDetailComponent } from './art-detail/art-detail.component';
+import { AccountComponent } from './account/account.component';
 
 const routes: Routes = [
   {
@@ -12,11 +14,17 @@ const routes: Routes = [
     component: ArtsComponent
   },
   {
-    path: 'artwork',
+    path: 'arts/artwork',
     component: ArtworkComponent
   },
-  { path: 'arts/:id', 
-  component: ArtworkComponent },
+  { 
+    path: 'arts/:id', 
+    component: ArtDetailComponent 
+  },
+  { 
+    path: 'account', 
+    component: AccountComponent 
+  },
   {
     path: 'user',
     component: UserComponent

@@ -20,6 +20,8 @@ router.get('/', (req,res) => {
     res.send('From API route')
 })
 
+// ACCOUNT
+
 // REGISTER
 
 router.post('/register', (req,res) => {
@@ -57,6 +59,43 @@ router.post('/login', (req,res)=> {
     })
 })
 
+// DELETE
+
+router.delete('/account/:id', (req, res) => {
+
+    let userId = req.params.id;
+    User.deleteOne({_id: userId}, function (err,) {
+        if (err) 
+        {
+            return handleError(err);
+        } else {
+            res.status(201).json({
+            success: true,
+            message: 'OK'
+            })
+        }
+            
+    });
+})
+
+// EDIT
+
+router.put('/account/:id', (req,res) => {
+    console.log(req.body.email);
+    
+    let userId = req.params.id;
+    let newUser = {email:req.body.email, password:req.body.password}
+    User.findOneAndUpdate({_id: userId}, newUser, function (err,) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.status(201).json({
+                success: true,
+                message: 'OK'
+            })        
+        }
+    })
+});
 
 // ARTS
 
@@ -69,18 +108,32 @@ router.get('/arts', (req,res) => {
     )
 }) 
 
+router.get('/myArts', (req,res) => {
+    let id = req.get('userId');
+    console.log(id);
+    Art.find({userId: id}, (error,arts) => {
+        if(error) return (error);
+        console.log(arts);
+        res.json(arts);
+    })
+})
+
 // // ARTWORK
 
 router.post('/artwork', (req,res) => {
-    let dateNow = Date.now();
-    let img_path = `/public/data/${dateNow}-img.png`;
+    console.log('add new artwork' + req.body)
+    
+
+    // let dateNow = Date.now();
+    // let img_path = `/public/data/${dateNow}-img.png`;
 
 
-    let artmodel = new Art(); 
-    artmodel.name = req.body.name;
-    artmodel.description = req.body.description;
-    // artmodel.date = req.body.date;
-    artmodel.ville = req.body.ville;
+    let newArtwork = new Art(req.body); 
+    
+    // artmodel.name = req.body.name;
+    // artmodel.description = req.body.description;
+    // // artmodel.date = req.body.date;
+    // artmodel.ville = req.body.ville;
   
     
     // if (!req.files)
@@ -88,7 +141,7 @@ router.post('/artwork', (req,res) => {
     //         let tmppath = req.files.path;
    
     
-    artmodel.save(function (error,artmodel) {        
+    newArtwork.save(function (error,newArtwork) {        
         if (error) {
             res.status(400);
         } else {

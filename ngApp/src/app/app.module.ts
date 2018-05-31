@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { Http, Headers, RequestOptions, HttpModule } from '@angular/http';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +15,9 @@ import { UserComponent } from './user/user.component';
 import { ArtsComponent } from './arts/arts.component';
 import { ArtworkComponent } from './artwork/artwork.component';
 import { ArtworkService } from './services/artwork.service';
+import { ArtDetailComponent } from './art-detail/art-detail.component';
+import { AccountComponent } from './account/account.component';
+
 
 
 @NgModule({
@@ -22,14 +27,17 @@ import { ArtworkService } from './services/artwork.service';
     LoginComponent,
     UserComponent,
     ArtsComponent,
-    ArtworkComponent
+    ArtworkComponent,
+    ArtDetailComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
-  ],
+    HttpClientModule, 
+    HttpModule
+    ],
   providers: [AuthService, ArtService, ArtworkService ],
   bootstrap: [AppComponent]
 })

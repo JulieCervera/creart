@@ -16,8 +16,8 @@ export class ArtworkComponent implements OnInit {
   ngOnInit() {
   }
 
-  addArtwork(newArtwork) {
-    this._artworkService.addArtwork(newArtwork)
+  addArtwork() {
+    this._artworkService.addArtwork(this.newArtwork)
     .subscribe(
       res => {
         console.log(res)       

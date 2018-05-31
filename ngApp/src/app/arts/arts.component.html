@@ -1,20 +1,21 @@
+<a [routerLink]="['artwork']"><p>Ajouter</p></a>
+
 <div class="col-12" *ngFor="let art of arts">
 
-<div class="row mt-5">
-  <div class="col-md-4 mb-3">
-    <div class="card text-center">
-      <div class="card-body">
-        <h5 class="card-title">{{art.name}}</h5>
-        <p class="card-text">{{art.description}}</p>
+  <div class="row mt-5">
+    <div class="col-md-4 mb-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">{{art.name}}</h5>
+          <p class="card-text">{{art.description}}</p>
+        </div>
+        <div class="card-footer text-muted">
+          {{art.ville}}
+        </div>
+        <a [routerLink]="['/arts', art._id]">
+          <p>Voir les détails</p>
+        </a>
       </div>
-      <div class="card-footer text-muted">
-        {{art.ville}}
-      </div>
-      <a [routerLink]="['/arts', art._id]"><p>Voir les détails</p></a>
     </div>
   </div>
 </div>
-
-</div>
-
-<p>Arts works</p>
