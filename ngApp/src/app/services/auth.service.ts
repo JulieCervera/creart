@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Http, Headers, RequestOptions } from '@angular/http';
+
 
 @Injectable()
 export class AuthService {
@@ -10,7 +12,8 @@ export class AuthService {
   private _accountUrl = 'http://localhost:3000/api/account';
 
   constructor(private http: HttpClient,
-              private _router: Router) { }
+              private _router: Router,
+            private _http:Http) { }
 
   registerUser(user) {
     return this.http.post<any>(this._registerUrl,user)
@@ -34,8 +37,12 @@ export class AuthService {
   }
 
 
-  deleteAccount(id) {
-    return this.http.delete(this._accountUrl+'/'+id); 
+  deleteAccount(userId) {
+    let headers = new Headers;
+    headers.append('userId', userId);
+    let options = new RequestOptions();
+    options.headers = headers;
+    return this._http.delete(this._accountUrl,options); 
   }
 
   editAccount(user) {

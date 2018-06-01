@@ -18,7 +18,7 @@ const routes: Routes = [
     component: ArtworkComponent
   },
   { 
-    path: 'arts/:id', 
+    path: 'arts/details/:id', 
     component: ArtDetailComponent 
   },
   { 

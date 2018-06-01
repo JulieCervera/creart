@@ -1,4 +1,6 @@
-<a [routerLink]="['artwork']"><p>Ajouter</p></a>
+<a [routerLink]="['artwork']">
+  <p>Ajouter</p>
+</a>
 
 <div class="col-12" *ngFor="let art of arts">
 
@@ -8,13 +10,11 @@
         <div class="card-body">
           <h5 class="card-title">{{art.name}}</h5>
           <p class="card-text">{{art.description}}</p>
+          <p class="card-text">{{art.ville}}</p>
         </div>
         <div class="card-footer text-muted">
-          {{art.ville}}
+          <a class="btn btn-primary" [routerLink]="['details/', art._id]" routerLinkActive="active">Voir les détails</a>
         </div>
-        <a [routerLink]="['/arts', art._id]">
-          <p>Voir les détails</p>
-        </a>
       </div>
     </div>
   </div>

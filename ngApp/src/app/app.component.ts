@@ -10,7 +10,7 @@ import { AuthService } from './services/auth.service';
 
 
 export class AppComponent {
-  title = 'app';
+  title = 'Creart';
 
   constructor(private _authService: AuthService) {}
 }

@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Http, Headers, RequestOptions, HttpModule } from '@angular/http';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +18,7 @@ import { ArtworkComponent } from './artwork/artwork.component';
 import { ArtworkService } from './services/artwork.service';
 import { ArtDetailComponent } from './art-detail/art-detail.component';
 import { AccountComponent } from './account/account.component';
+import { PictureComponent } from './picture/picture.component';
 
 
 
@@ -29,12 +31,14 @@ import { AccountComponent } from './account/account.component';
     ArtsComponent,
     ArtworkComponent,
     ArtDetailComponent,
-    AccountComponent
+    AccountComponent,
+    PictureComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    RouterModule,
     HttpClientModule, 
     HttpModule
     ],

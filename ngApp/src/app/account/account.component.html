@@ -11,12 +11,13 @@
           <div class="card-body">
             <form class="form">
               <div class="form-group">
-                <label for="uname1">Username</label>
-                <input [(ngModel)]='loginUserData.email' type="text" name="email" class="form-control rounded-0" required>
+                <p>email: {{loginUserData.email }} </p>
+                <label for="uname1">nouveau email</label>
+                <input [(ngModel)]='loginUserData.email' type="text" name="email" class="form-control rounded-0" placeholder='email' required>
               </div>
               <div class="form-group">
                 <label for="">Password</label>
-                <input [(ngModel)]='loginUserData.password' type="password" name="password" class="form-control rounded-0"  required>
+                <input [(ngModel)]='loginUserData.password' type="password" name="password" class="form-control rounded-0" placeholder='password' required>
               </div>
               <button (click)='editAccount()' type="button" class="btn btn-secondary float-left">Edit account informations</button>
               <button (click)='deleteAccount()' type="button" class="btn btn-danger float-left">Delete Account</button>
