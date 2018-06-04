@@ -97,17 +97,17 @@
         font-weight: bold;
     }
 
-    h1, h2, h3, h4 {
+    h2, h3, h4 {
     font-family: 'Questrial', sans-serif;
     }
 
+    h1, .title {
+    font-family: 'Knewave', cursive;
+    color: white;
+    font-size: 35px;
 
-    body {
     }
 
     nav {
         background-color: #FFC107;
     }
-
-    .container-fluid {
-    } 

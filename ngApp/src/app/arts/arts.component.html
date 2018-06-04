@@ -1,6 +1,6 @@
 <div class="row p-1">
   <div class="col-12 d-flex justify-content-end">
-    <div class="search input-group mb-3 col-6 mt-3">
+    <div class="search input-group mb-3 col-12 col-md-6 mt-3">
       <span>
         <i class="fas fa-search fa-2x"></i>
       </span>
@@ -12,7 +12,7 @@
   <div class="card-columns">
     <div style="display: inline-block" class="card hovereffect rounded-0" *ngFor="let art of displayedArts">
         <img class="card-img rounded-0" [src]="'assets/images/' + art.picture_path" alt="">
-        <div class="overlay card-body">
+        <div class="overlay card-body h-100 p-1 p-md-2">
           <h2>{{art.name}}</h2>
           <p class="card-text lead author">{{art.author | uppercase }}</p>
           <p class="card-text lead text-light">{{art.ville}}</p>
