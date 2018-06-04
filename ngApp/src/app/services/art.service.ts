@@ -34,7 +34,7 @@ export class ArtService {
     headers.append('userId', userId);
     let options = new RequestOptions();
     options.headers = headers;
-    return this._http.get(this._detailsUrl, options)
+    return this._http.get(this._myArtsUrl, options)
   }
 
 

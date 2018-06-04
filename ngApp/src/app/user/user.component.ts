@@ -19,13 +19,11 @@ export class UserComponent implements OnInit {
 
 
   ngOnInit() {
-    this._artService.getMyArts().
-    subscribe(
+    this._artService.getMyArts()
+    .subscribe(
       res => this.myArts = res.json(),
       err => console.log(err)
     )
   }
-
-
   
 }

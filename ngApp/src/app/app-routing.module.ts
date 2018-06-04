@@ -7,6 +7,7 @@ import { UserComponent } from './user/user.component';
 import { ArtworkComponent } from './artwork/artwork.component';
 import { ArtDetailComponent } from './art-detail/art-detail.component';
 import { AccountComponent } from './account/account.component';
+import { PictureComponent } from './picture/picture.component';
 
 const routes: Routes = [
   {
@@ -14,11 +15,15 @@ const routes: Routes = [
     component: ArtsComponent
   },
   {
-    path: 'arts/artwork',
+    path: 'upload',
+    component: PictureComponent
+  },
+  {
+    path: 'upload/:id',
     component: ArtworkComponent
   },
   { 
-    path: 'arts/details/:id', 
+    path: 'details/:id', 
     component: ArtDetailComponent 
   },
   { 

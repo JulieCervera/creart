@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Http, Headers, RequestOptions, HttpModule } from '@angular/http';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Routes, ActivatedRoute, RouterModule } from '@angular/router';
+import { FormBuilder, FormGroup, Validators} from "@angular/forms";
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +21,7 @@ import { ArtworkService } from './services/artwork.service';
 import { ArtDetailComponent } from './art-detail/art-detail.component';
 import { AccountComponent } from './account/account.component';
 import { PictureComponent } from './picture/picture.component';
+
 
 
 
@@ -40,7 +43,8 @@ import { PictureComponent } from './picture/picture.component';
     AppRoutingModule,
     RouterModule,
     HttpClientModule, 
-    HttpModule
+    HttpModule,
+    ReactiveFormsModule,
     ],
   providers: [AuthService, ArtService, ArtworkService ],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../services/auth.service";
+import { Router } from "@angular/router"
 
 
 @Component({
@@ -10,7 +11,8 @@ import { AuthService } from "../services/auth.service";
 export class RegisterComponent implements OnInit {
 
   registerUserData = {}
-  constructor(private _auth: AuthService) { }
+  constructor(private _auth: AuthService,
+    private _router: Router) { }
 
   ngOnInit() {
   }
@@ -22,6 +24,7 @@ export class RegisterComponent implements OnInit {
           console.log(res)
           let token = res._id
           localStorage.setItem('local_token',token);
+          this._router.navigate(['/arts'])
         },
         err => console.log(err)
       )

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { ArtworkService } from "../services/artwork.service";
+import { Http } from '@angular/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,10 +13,30 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class PictureComponent implements OnInit {
 
-  constructor() { }
+  fileToUpload: File = null;
+
+  constructor( private _ArtworkService: ArtworkService,
+      private http: HttpClient, 
+      private _router: Router) { }
 
   ngOnInit() {
   }
+
+  handleFileInput(files: FileList) {
+    this._ArtworkService.postFile(this.fileToUpload)
+    .subscribe(res => {
+      console.log(res._id);
+      this._router.navigate(['upload'+ '/' + res._id]);
+    })
+  }
+
+  onFileSelected(event) {
+    console.log(event);
+    this.fileToUpload = <File>event.target.files[0];
+
+  }
+
+  
 
 
 

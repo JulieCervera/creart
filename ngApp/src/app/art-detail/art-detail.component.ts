@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { ArtService } from "../services/art.service";
+import { AuthService } from "../services/auth.service"
 
 @Component({
   selector: 'app-art-detail',
@@ -16,20 +17,26 @@ export class ArtDetailComponent implements OnInit {
     _id: String,
     userId: String,
     _v: Number
-  } 
+  }
+
+  isUserArt = false;
   
   constructor( private route: ActivatedRoute,
                 private router: Router,
-                private _artService: ArtService) { }
+                private _artService: ArtService,
+              private _authService: AuthService) { }
 
   ngOnInit() {
     this.art._id = this.route.snapshot.params["id"];
     this._artService.getArtDetails(this.art._id)
       .subscribe(
-       res => this.art = res.json(),
-        // res => console.log(res),
-        err => console.log(err)
+      res => {this.art = res.json(),
+      err => console.log(err)
       )
+    let userId = art.userId;
+    let currentUserId = this._authService.getToken()
+    console.log('userId', userId);
+    console.log('currentUserId', currentUserId);
   }
 
   deleteMyArt() {
@@ -42,7 +49,4 @@ export class ArtDetailComponent implements OnInit {
       err => console.log(err)
     )
   }
-
-  
-
 }

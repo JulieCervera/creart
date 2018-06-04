@@ -1,3 +1,8 @@
-<form  method="post" enctype="multipart/form-data">
-<input type="file" name="files" formControlName="files"><br>
-</form>
+<!-- <form  method="post" enctype="multipart/form-data">
+<input type="file" name="files" formControlName="files" (change)='handleFileInput($event.target.files)'><br>
+
+</form> -->
+
+<h1>File Upload</h1>
+<input type="file" (change)='onFileSelected($event)'>
+<button type='button' (click)='handleFileInput()'>Upload</button>

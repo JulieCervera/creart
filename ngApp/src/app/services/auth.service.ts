@@ -29,7 +29,7 @@ export class AuthService {
 
   logoutUser(){
     localStorage.removeItem('local_token');
-    this._router.navigate(['/login']);
+    this._router.navigate(['']);
   }
 
   getToken() {

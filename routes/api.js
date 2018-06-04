@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const formidable = require('formidable');
+const fileUpload = require('express-fileupload');
 
 const mongoose = require('mongoose');
 const db = 'mongodb://user1:test@ds147459.mlab.com:47459/creartdb';
@@ -117,75 +118,53 @@ router.get('/arts', (req, res) => {
 })
 
 router.get('/myArts', (req, res) => {
+
     let id = req.get('userId');
-    console.log(id);
+
     Art.find({
         userId: id
     }, (error, arts) => {
         if (error) return (error);
-        console.log(arts);
         res.json(arts);
     })
 })
 
-// // ARTWORK
-// update picture
-router.post("/artwork/file/:id", (req, res) => {
 
 
-    Art.findOne({_id:req.params.id}, (error, art) => {
+router.post("/upload", (req, res) => {
+    let art = new Art(req.body);
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+        var oldpath = files.files.path;
+        console.log(files.files);
+        var newpath = "./ngApp/src/assets/images/" + files.files.name;
+        fs.rename(oldpath, newpath, function (err) {
+            if (err) throw err;
+        });
+        art.picture_path = files.files.name;
 
-        var form = new formidable.IncomingForm();
-        form.parse(req, function (err, fields, files) {
-            console.log(files.files.path);
-            
-            var oldpath = files.files.path;
-            console.log(oldpath);
-            
-            var newpath = "/Users/juliecervera/Desktop/creart/public/" + files.files.name;
-            fs.rename(oldpath, newpath, function (err) {
-                if (err) throw err;
-                res.write('File uploaded and moved!');
-                res.end();
-
-                art.picture_path = newpath;
-
-                console.log(art);
-                art.save(function (error, newArtwork) {
-                    if (error) {
-                        res.status(400);
-                    } else {
-                        res.status(201).json({
-                            success: true,
-                            message: 'OK',
-                            artwork: newArtwork
-                        })
-                    }
-                })
-
-            });
-
+        art.save(function (error, newArtwork) {
+            if (error) {
+                res.status(400);
+            } else {
+                res.status(200).send(newArtwork)
+            }
         })
-     
-
-
-    })
+    });
 });
 
 
-router.post('/artwork', (req, res) => {
-    console.log('add new artwork' + req.body)
-
-    let newArtwork = new Art(req.body);
-
-    newArtwork.save(function (error, newArtwork) {
-        if (error) {
-            res.status(400);
+router.put('/upload', (req, res) => {
+    console.log('add new artwork', req.body._id);
+    Art.findOneAndUpdate({
+        _id: req.body._id
+    }, req.body, function (err, ) {
+        if (err) {
+            res.send(err);
         } else {
             res.status(201).json({
                 success: true,
-                message: 'OK',
-                artwork: newArtwork
+                message: 'OK'
             })
         }
     })
@@ -196,13 +175,13 @@ router.post('/artwork', (req, res) => {
 
 router.get('/details', (req, res) => {
     let id = req.get('artId');
-    console.log(id);
     Art.findOne({
         _id: id
-    }, (error, arts) => {
+    }, (error, art) => {
         if (error) return (error);
-        console.log(arts);
-        res.json(arts);
+        console.log(art);
+        res.status(200).send(art)
+        // res.json(arts);
     })
 })
 
