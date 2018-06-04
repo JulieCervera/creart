@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Http, Headers, RequestOptions, HttpModule } from '@angular/http';
 import { Routes, ActivatedRoute, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators} from "@angular/forms";
-import { MatAutocompleteModule, MatInputModule } from '@angular/material';
 
 
 
@@ -22,6 +21,7 @@ import { ArtworkService } from './services/artwork.service';
 import { ArtDetailComponent } from './art-detail/art-detail.component';
 import { AccountComponent } from './account/account.component';
 import { PictureComponent } from './picture/picture.component';
+import { SearchService } from "./services/search.service";
 
 
 
@@ -45,11 +45,9 @@ import { PictureComponent } from './picture/picture.component';
     RouterModule,
     HttpClientModule, 
     HttpModule,
-    MatInputModule,
     ReactiveFormsModule,
-    MatAutocompleteModule,
       ],
-  providers: [AuthService, ArtService, ArtworkService ],
+  providers: [AuthService, ArtService, ArtworkService, SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

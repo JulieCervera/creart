@@ -14,7 +14,14 @@ import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 
 export class ArtworkComponent implements OnInit {
   
-  newArtwork = {};
+  newArtwork = {
+    name: String,
+    description: String,
+    ville: String,
+    _id: String,
+    userId: String,
+    _v: Number
+  };
 
   constructor(private _artworkService: ArtworkService,
     private route: ActivatedRoute,
@@ -37,62 +44,4 @@ export class ArtworkComponent implements OnInit {
       err => console.log(err)
     )
   }
-}  
-
-
-// export class ArtworkComponent implements OnInit {
-//   newArtwork = {};
-//   dataArtwork = {
-//     name: '',
-//     description: '',
-//     ville: '',
-//     files: {}
-//   };
-
-//   form: FormGroup;
-//   fileToUpload: File = null;
-
-
-//   constructor(private _artworkService: ArtworkService,
-//     private fb: FormBuilder) {
-//       this.form = this.fb.group({
-//         name: ['', Validators.required],
-//         description: ['', Validators.required],
-//         ville: ['', Validators.required],
-//         files: ['', Validators.required],
-//       });
-//      }
-  
-
-//   ngOnInit() {
-//   }
-
-//   handleFileInput(files: FileList) {
-//     this.fileToUpload = files.item(0);
-//   }
-
-//   onSubmit() {
-//     // this.form.controls.files.value = this.fileToUpload;
-//     // this.dataArtwork.description = this.form.controls.description.value;
-//     // this.dataArtwork.name = this.form.controls.name.value;
-//     // this.dataArtwork.ville = this.form.controls.ville.value
-//     // this.dataArtwork.files = this.form.controls.files.value;
-//     console.log(this.form);
-
-//     this._artworkService.addArtwork(this.dataArtwork)
-//     .subscribe(
-//       res => {
-//         console.log(this.dataArtwork);
-//         console.log(res);
-//         // this._artworkService.postFile(this.fileToUpload, res.artwork['_id']).subscribe(res => {
-//         //   console.log(res);
-//         // })
-//         // appel fonction upload picture avec id (res.artwork.id) => model artwork
-//         // redirect page artwork avec le model artwork retourné
-
-//       },
-//       err => console.log(err)
-//     )
-  
-// }
-// }
+}

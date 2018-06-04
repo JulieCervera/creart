@@ -22,7 +22,7 @@ export class PictureComponent implements OnInit {
   ngOnInit() {
   }
 
-  handleFileInput(files: FileList) {
+  handleFileInput() {
     this._ArtworkService.postFile(this.fileToUpload)
     .subscribe(res => {
       console.log(res._id);
