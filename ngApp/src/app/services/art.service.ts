@@ -38,11 +38,12 @@ export class ArtService {
   }
 
 
-  deleteMyArt(artId) {
+  deleteMyArt(art) {
+    let artId = art._id;
     let headers = new Headers();
     headers.append('artId', artId);
     let options = new RequestOptions();
-    options.headers = headers;
+    options.headers = headers;    
     return this._http.delete(this._detailsUrl, options);
   }
 

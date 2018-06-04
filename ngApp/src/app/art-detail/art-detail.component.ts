@@ -30,21 +30,23 @@ export class ArtDetailComponent implements OnInit {
     this.art._id = this.route.snapshot.params["id"];
     this._artService.getArtDetails(this.art._id)
       .subscribe(
-      res => {this.art = res.json(),
+      res => this.art = res.json(),
       err => console.log(err)
       )
-    let userId = art.userId;
-    let currentUserId = this._authService.getToken()
-    console.log('userId', userId);
-    console.log('currentUserId', currentUserId);
+    //   .then(
+    // let userId = this.art.userId;
+    // let currentUserId = this._authService.getToken()
+    // console.log('userId', userId);
+    // console.log('currentUserId', currentUserId);
+    //   )
   }
 
   deleteMyArt() {
+    let artId = this.art._id;
     this._artService.deleteMyArt(this.art)
     .subscribe(
       res => {
-        console.log(res);
-        this.router.navigate(['/arts']);   
+      this.router.navigate(['arts']);   
       },
       err => console.log(err)
     )

@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Http, Headers, RequestOptions, HttpModule } from '@angular/http';
 import { Routes, ActivatedRoute, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { MatAutocompleteModule, MatInputModule } from '@angular/material';
 
 
 
@@ -44,8 +45,10 @@ import { PictureComponent } from './picture/picture.component';
     RouterModule,
     HttpClientModule, 
     HttpModule,
+    MatInputModule,
     ReactiveFormsModule,
-    ],
+    MatAutocompleteModule,
+      ],
   providers: [AuthService, ArtService, ArtworkService ],
   bootstrap: [AppComponent]
 })

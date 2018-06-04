@@ -180,7 +180,7 @@ router.get('/details', (req, res) => {
     }, (error, art) => {
         if (error) return (error);
         console.log(art);
-        res.status(200).send(art)
+        res.status(200).send(art);
         // res.json(arts);
     })
 })
@@ -188,17 +188,21 @@ router.get('/details', (req, res) => {
 router.delete('/details', (req, res) => {
     let id = req.get('artId');
     console.log(id);
-    Art.deleteOne({
+    Art.remove({
         _id: id
-    }, (error, arts) => {
-        if (error) return (error);
-        console.log(arts);
+    }, function (err) {
+        if (err) {
+            res.status(400).json({
+                success: false,
+                message: 'Error processing request ' + err
+            });
+        }
+        res.status(201).json({
+            success: true,
+            message: 'art removed successfully'
+        });
     })
 })
-
-
-
-
 
 
 module.exports = router;
