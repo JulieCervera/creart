@@ -85,17 +85,11 @@ router.delete('/account', (req, res) => {
 
 // EDIT
 
-router.put('/account/:id', (req, res) => {
-    console.log(req.body.email);
-
-    let userId = req.params.id;
-    let newUser = {
-        email: req.body.email,
-        password: req.body.password
-    }
+router.put('/account', (req, res) => {
+    console.log(req.body);
     User.findOneAndUpdate({
-        _id: userId
-    }, newUser, function (err, ) {
+        _id: req.body._id
+    }, req.body, function (err, ) {
         if (err) {
             res.send(err);
         } else {
@@ -147,7 +141,7 @@ router.post("/upload", (req, res) => {
             if (error) {
                 res.status(400);
             } else {
-                res.status(200).send(newArtwork)
+                res.status(200).json(newArtwork._id)
             }
         })
     });
@@ -202,6 +196,24 @@ router.delete('/details', (req, res) => {
             message: 'art removed successfully'
         });
     })
+})
+
+
+router.put('/details', (req, res) => {
+    console.log('edit artwork', req.body._id);
+    Art.findOneAndUpdate({
+        _id: req.body._id
+    }, req.body, function (err, ) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.status(201).json({
+                success: true,
+                message: 'OK'
+            })
+        }
+    })
+
 })
 
 

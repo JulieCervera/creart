@@ -24,7 +24,9 @@ export class ArtsComponent implements OnInit {
     this._artService.getArts()
       .subscribe(
         res => {this.arts = res, 
-        this.displayedArts = this.arts
+        this.displayedArts = this.arts,
+        console.log(this.arts);
+        console.log(this.displayedArts);
         },
         err => console.log(err)
       )

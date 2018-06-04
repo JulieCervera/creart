@@ -15,17 +15,21 @@ import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 export class ArtworkComponent implements OnInit {
   
   newArtwork = {
-    name: String,
-    description: String,
-    ville: String,
-    _id: String,
     userId: String,
+    name: String,
+    author: 'Unknown',
+    tags: String,
+    address: String,
+    ville: '',
+    picture_path: String,
+    _id: String,
     _v: Number
   };
 
   constructor(private _artworkService: ArtworkService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router) {
+    }
   
 
   ngOnInit() {
@@ -33,7 +37,8 @@ export class ArtworkComponent implements OnInit {
 
   addArtwork() {
     this.newArtwork._id = this.route.snapshot.params["id"];
-    console.log(this.newArtwork);    
+    this.newArtwork.ville = this.newArtwork.ville.toUpperCase(); 
+    console.log(this.newArtwork);  
     this._artworkService.addArtwork(this.newArtwork)
     .subscribe(
       res => {

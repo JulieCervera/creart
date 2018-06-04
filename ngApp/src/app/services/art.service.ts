@@ -47,12 +47,8 @@ export class ArtService {
     return this._http.delete(this._detailsUrl, options);
   }
 
-  editMyArt(artId) {
-    let headers = new Headers();
-    headers.append('artId', artId);
-    let options = new RequestOptions();
-    options.headers = headers;
-    return this._http.put(this._detailsUrl, options);
+  editMyArt(art) {
+    return this._http.put(this._detailsUrl, art);
   }
 
 }

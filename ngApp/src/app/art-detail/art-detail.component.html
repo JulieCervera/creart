@@ -1,36 +1,61 @@
-<div class="row p-O" style="height: 700px;" [ngStyle]="{ 'background-image': 'url(assets/images/' + art.picture_path + ')'}">
-  <div class="col-md-4 art-detail d-flex flex-column justify-content-between p-4" style="height: 100%;">
-    <div class="text-center">
-      <h2 class="display-4 text-white">{{art.name}}</h2>
-      <p class="lead text-white">{{art.description}}</p>
-      <p class="lead text-white">{{art.ville}}</p>
-    </div>
-    <div class="d-flex flex-row justify-content-around mb-3 p-2">
-      <a class="btn btn-warning btn-lg rounded-circle btn-circle m-1" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-          <i class="fas fa-edit fa-2x"></i>
-      </a>
-      <button class="btn btn-danger btn-lg rounded-circle btn-circle m-1" type="button" (click)='deleteMyArt()'>
-          <i class="fas fa-trash-alt fa-2x"></i>
-      </button>
-      <div class="collapse" id="collapseExample">
-        <div class="card card-body">
-          <form class="form">
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input [(ngModel)]='art.name' type="text" name="name" class="form-control rounded-0" required>
-            </div>
-            <div class="form-group">
-              <label for="description">Description</label>
-              <input [(ngModel)]='art.description' type="text" name="description" class="form-control rounded-0">
-            </div>
-            <div class="form-group">
-              <label for="ville">Ville</label>
-              <input [(ngModel)]='art.ville' type="text" name="ville" class="form-control rounded-0">
-            </div>
-            <button (click)='editMyArt()' type="button" class="btn btn-success float-right">EDIT</button>
-          </form>
-        </div>
+<div class="row" style="height:100%;">
+  <div class="col col-3 p-0" style="height:100%;">
+    <div class="p-0 art-detail d-flex flex-column justify-content-between p-4" style="height: 100%;">
+      <div class="text-center">
+        <h2 class="">{{art.name}}</h2>
+        <h3 class="author">{{art.author | uppercase }}</h3>
+        <h4 class="">Tags : {{art.tags}}</h4>
+        <p class="lead">{{art.address}}, {{art.ville}}</p>
       </div>
+      <div class="d-flex flex-row justify-content-around mb-4 p-2">
+        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editArt">EDIT</button>
+        <button class="btn btn-danger m-1" type="button" (click)='deleteMyArt()'>
+          DELETE
+        </button>
+      </div>
+      <div class="modal fade" id="editArt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit this artwork</h5>
+                <button type="button" class="btn btn-warning" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <form class="form">
+                      <div class="form-group">
+                        <label for="name">Name</label>
+                        <input [(ngModel)]='art.name' type="text" name="name" class="form-control rounded-0" placeholder="name" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="description">Artist</label>
+                        <input [(ngModel)]='art.author' type="text" name="description" placeholder="Artist" class="form-control rounded-0">
+                      </div>
+                      <div class="form-group">
+                          <label for="description">Tags</label>
+                          <input [(ngModel)]='art.tags' type="text" name="description" placeholder="tags" class="form-control rounded-0">
+                        </div>
+                      <div class="form-group">
+                          <label for="description">Spotted</label>
+                          <input [(ngModel)]='art.address' type="text" name="description" placeholder="adress" class="form-control rounded-0">
+                        </div>
+                      <div class="form-group">
+                        <label for="ville">City</label>
+                        <input [(ngModel)]='art.ville' type="text" name="ville" placeholder="City" class="form-control rounded-0">
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)='editMyArt()'>Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
+  </div>
+  <div class="col p-0 justify-content-start align-items-center" style="height:100%;">
+    <img class="img-fluid w-100 h-100" [src]="'assets/images/' + art.picture_path" alt="">
   </div>
 </div>

@@ -13,7 +13,11 @@ import {
 })
 export class AccountComponent implements OnInit {
 
-  loginUserData = {}
+  loginUserData = {
+    email: '',
+    password: '',
+    _id:'',
+  }
   constructor(private _auth: AuthService) {}
 
   ngOnInit() {}
@@ -31,6 +35,8 @@ export class AccountComponent implements OnInit {
   }
 
   editAccount() {
+    this.loginUserData._id = localStorage.getItem('local_token');
+    console.log(this.loginUserData);    
     this._auth.editAccount(this.loginUserData)
       .subscribe(
         res => {

@@ -4,8 +4,9 @@ const Schema = mongoose.Schema;
 const artworkSchema = new Schema({
     userId: String,
     name: String,
-    description: String,
-    // date: Date,
+    author: String,
+    tags: String,
+    address: String,
     ville: String,
     picture_path: String,
 });

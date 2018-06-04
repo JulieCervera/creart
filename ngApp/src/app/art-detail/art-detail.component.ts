@@ -42,11 +42,21 @@ export class ArtDetailComponent implements OnInit {
   }
 
   deleteMyArt() {
-    let artId = this.art._id;
     this._artService.deleteMyArt(this.art)
     .subscribe(
       res => {
-      this.router.navigate(['arts']);   
+      this.router.navigate(['user']);   
+      },
+      err => console.log(err)
+    )
+  }
+
+  editMyArt() {
+    this._artService.editMyArt(this.art)
+    .subscribe(
+      res => {
+        console.log(res);
+        this.router.navigate(['user']);        
       },
       err => console.log(err)
     )
