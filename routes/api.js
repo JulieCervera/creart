@@ -63,7 +63,7 @@ router.post('/login', (req, res) => {
 
 router.delete('/account', (req, res) => {
     let userId = req.get('userId');
-    User.deleteOne({ _id: userId }, function (err) {
+    User.deleteOne({ _id: userId }, function (err, res) {
         if (err) handleError(err);
         res.status(201);
     });
@@ -72,7 +72,7 @@ router.delete('/account', (req, res) => {
 // edit user information
 
 router.put('/account', (req, res) => {
-    User.findOneAndUpdate({ _id: req.body._id }, req.body, function (err) {
+    User.findOneAndUpdate({ _id: req.body._id }, req.body, function (err, res) {
         if (err) res.send(err);
         res.status(201)
     });
@@ -97,33 +97,47 @@ router.get('/myArts', (req, res) => {
     })
 })
 
-// upload an image
+
+// upload an image and add picture_path in database
 
 router.post("/upload", (req, res) => {
     let art = new Art(req.body);
-    let form = new formidable.IncomingForm();
+    var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
-        let oldpath = files.files.path;
-        let newpath = "./ngApp/src/assets/images/" + files.files.name;
+        var oldpath = files.files.path;
+        console.log(files.files);
+        var newpath = "./ngApp/src/assets/images/" + files.files.name;
         fs.rename(oldpath, newpath, function (err) {
-            if (err) res.send(err);
+            if (err) throw err;
         });
         art.picture_path = files.files.name;
+
         art.save(function (error, newArtwork) {
-            if (error) res.send(error);
-            res.status(200).json(newArtwork._id);
+            if (error) {
+                res.status(400);
+            } else {
+                res.status(200).send(newArtwork._id)
+            }
         })
     });
 });
 
-// Add new art
-
+// Add other field of artwork (linked to the image) in database
 router.put('/upload', (req, res) => {
     console.log('add new artwork', req.body._id);
-    Art.findOneAndUpdate({ _id: req.body._id }, req.body, function (err) {
-        if (err) res.send(err);
-        res.status(201);
+    Art.findOneAndUpdate({
+        _id: req.body._id
+    }, req.body, function (err,res) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.status(201).json({
+                success: true,
+                message: 'OK'
+            })
+        }
     })
+
 })
 
 // Return art informations

@@ -15,16 +15,16 @@ import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 export class ArtworkComponent implements OnInit {
   
   newArtwork = {
-    userId: '',
+    userId: String,
     name: '',
     author: 'Unknown',
     tags: '',
     address: '',
     ville: '',
-    picture_path: '',
-    _id: '',
-    _v: 0
-  };
+    picture_path: String,
+    _id: String,
+    _v: Number
+};
 
   constructor(private _artworkService: ArtworkService,
     private route: ActivatedRoute,
@@ -43,9 +43,10 @@ export class ArtworkComponent implements OnInit {
     .subscribe(
       res => {
         console.log(res);
-        this.router.navigate(['/user']);
+        this.router.navigate(['/user']);         
+
       },
       err => console.log(err)
     )
-  }
+}
 }

@@ -25,6 +25,7 @@ export class PictureComponent implements OnInit {
   handleFileInput() {
     this._ArtworkService.postFile(this.fileToUpload)
     .subscribe(res => {
+      console.log(res)
       this._router.navigate(['upload'+ '/' + res]);
     })
   }

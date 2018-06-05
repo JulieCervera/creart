@@ -11,18 +11,21 @@ export class ArtworkService {
   constructor(private http: HttpClient, 
   private _authService : AuthService ) { }
 
-  addArtwork(newArtwork) {
-    let userId = this._authService.getToken(); 
-    newArtwork.userId = userId;
-    console.log(newArtwork);   
-    return this.http.put<any>(this._artworkUrl, newArtwork);
-  }
+  
 
 
   postFile(fileToUpload: File) {
     const formData: FormData = new FormData();
     formData.append('files', fileToUpload, fileToUpload.name);
     return this.http.post(this._artworkUrl, formData);
+  }
+
+
+  addArtwork(newArtwork) {
+    let userId = this._authService.getToken(); 
+    newArtwork.userId = userId;
+    console.log(newArtwork);   
+    return this.http.put<any>(this._artworkUrl, newArtwork);
   }
 }
 
