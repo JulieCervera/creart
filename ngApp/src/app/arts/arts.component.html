@@ -9,8 +9,8 @@
     </div>
   </div>
   <div class="col-12">
-  <div class="card-columns">
-    <div style="display: inline-block" class="card hovereffect rounded-0" *ngFor="let art of displayedArts">
+    <div class="card-columns">
+      <div style="display: inline-block" class="card hovereffect rounded-0" *ngFor="let art of displayedArts">
         <img class="card-img rounded-0" [src]="'assets/images/' + art.picture_path" alt="">
         <div class="overlay card-body h-100 p-1 p-md-2">
           <h2>{{art.name}}</h2>
@@ -21,8 +21,7 @@
             <i class="fas fa-eye fa-lg"></i>
           </button>
         </div>
+      </div>
     </div>
   </div>
 </div>
-</div>
-

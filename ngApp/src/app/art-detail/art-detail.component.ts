@@ -8,6 +8,7 @@ import { AuthService } from "../services/auth.service"
   templateUrl: './art-detail.component.html',
   styleUrls: ['./art-detail.component.css']
 })
+
 export class ArtDetailComponent implements OnInit {
 
   art = {
@@ -20,53 +21,52 @@ export class ArtDetailComponent implements OnInit {
   }
 
   isUserArt = false;
-  
-  constructor( private route: ActivatedRoute,
-                private router: Router,
-                private _artService: ArtService,
-              private _authService: AuthService) { }
 
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private _artService: ArtService,
+    private _authService: AuthService) { }
+
+  // On init get art detail informations
   ngOnInit() {
     this.art._id = this.route.snapshot.params["id"];
     this._artService.getArtDetails(this.art._id)
       .subscribe(
-      res => {this.art = res.json();
-      console.log(this.art);
-      setTimeout(this.verifyUser(this.art), 1500);
-    },
-      err => console.log(err)
+        res => {
+          this.art = res.json();
+          setTimeout(this.verifyUser(this.art), 1500);
+        },
+        err => alert(err.error)
       );
   }
+
+  // Check if current user is this art editor
   verifyUser(art) {
     let userId = art.userId;
     let currentUserId = this._authService.getToken()
-    console.log('userId', userId);
-    console.log('currentUserId', currentUserId);
     if (userId == currentUserId) {
       this.isUserArt = true;
     } else {
       this.isUserArt = false;
     }
-    }
+  }
 
+  // Delete this art
   deleteMyArt() {
     this._artService.deleteMyArt(this.art)
-    .subscribe(
-      res => {
-      this.router.navigate(['user']);   
-      },
-      err => console.log(err)
-    )
+      .subscribe(
+        res => this.router.navigate(['user']),
+        err => alert(err.error)
+      );
   }
 
+  // Collect new art informations
   editMyArt() {
     this._artService.editMyArt(this.art)
-    .subscribe(
-      res => {
-        console.log(res);
-        this.router.navigate(['user']);        
-      },
-      err => console.log(err)
-    )
+      .subscribe(
+        res => this.router.navigate(['user']),
+        err => alert(err.error)
+      );
   }
+
 }

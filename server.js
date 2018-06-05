@@ -14,7 +14,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use('/api',api);
-app.use('/public',express.static('./public'));
 app.use(fileUpload());
 
 

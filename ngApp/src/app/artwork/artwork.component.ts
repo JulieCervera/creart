@@ -4,8 +4,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 
-
-
 @Component({
   selector: 'app-artwork',
   templateUrl: './artwork.component.html',
@@ -28,25 +26,20 @@ export class ArtworkComponent implements OnInit {
 
   constructor(private _artworkService: ArtworkService,
     private route: ActivatedRoute,
-    private router: Router) {
-    }
+    private router: Router) { }
   
+  ngOnInit() { }
 
-  ngOnInit() {
-  }
-
+  // Add informations of the image uploaded previously to complete a new art entry in collection
   addArtwork() {
     this.newArtwork._id = this.route.snapshot.params["id"];
+    // Set city value to uppercase
     this.newArtwork.ville = this.newArtwork.ville.toUpperCase(); 
-    console.log(this.newArtwork);  
     this._artworkService.addArtwork(this.newArtwork)
     .subscribe(
-      res => {
-        console.log(res);
-        this.router.navigate(['/user']);         
-
-      },
+      res => this.router.navigate(['/user']),
       err => console.log(err)
-    )
-}
+    );
+  }
+
 }

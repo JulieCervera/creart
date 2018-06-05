@@ -1,24 +1,20 @@
-<!-- <form  method="post" enctype="multipart/form-data">
-<input type="file" name="files" formControlName="files" (change)='handleFileInput($event.target.files)'><br>
-
-</form> -->
 <div class="col-md-6 mx-auto">
 
-        <!-- form card login -->
-        <div class="card rounded-0">
-          <div class="card-header">
-            <h3 class="mb-0">Upload your image</h3>
-          </div>
-          <div class="card-body">
-            <form class="form">
-              <div class="form-group">
-                    <input type="file" (change)='onFileSelected($event)'>
-              </div>
-              <button (click)='handleFileInput()' type="button" class="btn btn-dark float-right">ADD</button>
-            </form>
-          </div>
-          <!--/card-block-->
+  <!-- form card login -->
+  <div class="card rounded-0">
+    <div class="card-header">
+      <h3 class="mb-0">Upload your image</h3>
+    </div>
+    <div class="card-body">
+      <form class="form">
+        <div class="form-group">
+          <input type="file" (change)='onFileSelected($event)'>
         </div>
-        <!-- /form card login -->
-      
-      </div>
+        <button (click)='handleFileInput()' type="button" class="btn btn-dark float-right">ADD</button>
+      </form>
+    </div>
+    <!--/card-block-->
+  </div>
+  <!-- /form card login -->
+
+</div>

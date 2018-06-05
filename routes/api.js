@@ -23,8 +23,7 @@ router.get('/', (req, res) => {
 });
 
 
-// Insert new user BDD
-
+// Insert new user in database
 router.post('/register', (req, res) => {
     let userData = req.body;
     let user = new User(userData);
@@ -34,11 +33,10 @@ router.post('/register', (req, res) => {
         } else {
             res.status(200).send(registeredUser);
         }
-    })
-})
+    });
+});
 
-// login
-
+// login, verify if user exist and authentication is correct then log
 router.post('/login', (req, res) => {
     let userData = req.body;
     User.findOne({ email: userData.email }, (error, user) => {
@@ -59,8 +57,7 @@ router.post('/login', (req, res) => {
     })
 })
 
-// delete user
-
+// remove user from database
 router.delete('/account', (req, res) => {
     let userId = req.get('userId');
     User.deleteOne({ _id: userId }, function (err, res) {
@@ -69,8 +66,7 @@ router.delete('/account', (req, res) => {
     });
 })
 
-// edit user information
-
+// update user information in database
 router.put('/account', (req, res) => {
     User.findOneAndUpdate({ _id: req.body._id }, req.body, function (err, res) {
         if (err) res.send(err);
@@ -78,8 +74,7 @@ router.put('/account', (req, res) => {
     });
 });
 
-// return all arts
-
+// return all arts collection of database
 router.get('/arts', (req, res) => {
     Art.find((error, art) => {
         if (error) res.send(error);
@@ -87,8 +82,7 @@ router.get('/arts', (req, res) => {
     });
 });
 
-//returns user collection
-
+//returns user arts from arts collection of database
 router.get('/myArts', (req, res) => {
     let id = req.get('userId');
     Art.find({ userId: id }, (error, arts) => {
@@ -99,7 +93,6 @@ router.get('/myArts', (req, res) => {
 
 
 // upload an image and add picture_path in database
-
 router.post("/upload", (req, res) => {
     let art = new Art(req.body);
     var form = new formidable.IncomingForm();
@@ -140,8 +133,7 @@ router.put('/upload', (req, res) => {
 
 })
 
-// Return art informations
-
+// Return art informations of selected art
 router.get('/details', (req, res) => {
     let id = req.get('artId');
     Art.findOne({ _id: id }, (error, art) => {
@@ -150,8 +142,7 @@ router.get('/details', (req, res) => {
     });
 });
 
-// Delete art
-
+// Delete art entry in database
 router.delete('/details', (req, res) => {
     let id = req.get('artId');
     Art.remove({ _id: id }, function (err) {
@@ -160,8 +151,7 @@ router.delete('/details', (req, res) => {
     });
 });
 
-// Edit art
-
+// update art entry in database
 router.put('/details', (req, res) => {
     console.log('edit artwork', req.body._id);
     Art.findOneAndUpdate({ _id: req.body._id }, req.body, function (err) {

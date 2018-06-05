@@ -5,10 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Http, Headers, RequestOptions, HttpModule } from '@angular/http';
 import { Routes, ActivatedRoute, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators} from "@angular/forms";
-
-
-
 import { AppRoutingModule } from './app-routing.module';
+
+
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
@@ -22,8 +21,6 @@ import { ArtDetailComponent } from './art-detail/art-detail.component';
 import { AccountComponent } from './account/account.component';
 import { PictureComponent } from './picture/picture.component';
 import { SearchService } from "./services/search.service";
-
-
 
 
 @NgModule({

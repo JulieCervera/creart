@@ -1,18 +1,21 @@
 <nav id="navbar" class="navbar navbar-dark navbar-expand-lg">
-    <a class="title navbar-brand ml-3" href="#"><h1 class="text-light">CREART</h1></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse nav justify-content-end" id="navbarSupportedContent">
-      <ul class="navbar-nav">
-          <a class="nav-link text-light" *ngIf="_authService.loggedIn()" routerLink="/user" routerLinkActive="active">My walls</a>
-          <a class="nav-link text-light" *ngIf="_authService.loggedIn()" routerLink="/account" routerLinkActive="active">Account</a>        
-          <a class="nav-link text-light" style="cursor:pointer" *ngIf="_authService.loggedIn()" (click)="_authService.logoutUser()">Logout</a>        
-          <a class="nav-link text-light" *ngIf="!_authService.loggedIn()" routerLink="/login" routerLinkActive="active">Login</a>
-          <a class="nav-link text-light" *ngIf="!_authService.loggedIn()" routerLink="/register" routerLinkActive="active">Register</a>
-      </ul>
-    </div>
-  </nav>    
-  <div class="container-fluid" style="height: 100%;">
-    <router-outlet></router-outlet>            
+  <a class="title navbar-brand ml-3" href="#">
+    <h1 class="text-light">CREART</h1>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse nav justify-content-end" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      <a class="nav-link text-light" *ngIf="_authService.loggedIn()" routerLink="/user" routerLinkActive="active">My walls</a>
+      <a class="nav-link text-light" *ngIf="_authService.loggedIn()" routerLink="/account" routerLinkActive="active">Account</a>
+      <a class="nav-link text-light" style="cursor:pointer" *ngIf="_authService.loggedIn()" (click)="_authService.logoutUser()">Logout</a>
+      <a class="nav-link text-light" *ngIf="!_authService.loggedIn()" routerLink="/login" routerLinkActive="active">Login</a>
+      <a class="nav-link text-light" *ngIf="!_authService.loggedIn()" routerLink="/register" routerLinkActive="active">Register</a>
+    </ul>
   </div>
+</nav>
+<div class="container-fluid" style="height: 100%;">
+  <router-outlet></router-outlet>
+</div>

@@ -12,31 +12,36 @@ export class AuthService {
   private _accountUrl = 'http://localhost:3000/api/account';
 
   constructor(private http: HttpClient,
-              private _router: Router,
-            private _http:Http) { }
+    private _router: Router,
+    private _http: Http) { }
 
+  // add new user
   registerUser(user) {
     return this.http.post<any>(this._registerUrl,user)
   }
  
+  // check if login informations
   loginUser(user) {
     return this.http.post<any>(this._loginUrl,user)
   }
 
+  // check if the user is logged in
   loggedIn() {
     return !!localStorage.getItem('local_token')
   }
 
+  // log out user
   logoutUser(){
     localStorage.removeItem('local_token');
     this._router.navigate(['']);
   }
 
+  // get user id in local storage
   getToken() {
     return localStorage.getItem('local_token');
   }
 
-
+  // remove user from user collection
   deleteAccount(userId) {
     let headers = new Headers;
     headers.append('userId', userId);
@@ -45,6 +50,7 @@ export class AuthService {
     return this._http.delete(this._accountUrl,options); 
   }
 
+  // change the user informations
   editAccount(user) {
     return this.http.put(this._accountUrl,user);
   }

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Http, Headers, RequestOptions } from '@angular/http';
-
 import { AuthService } from '../services/auth.service';
 import { Options } from 'selenium-webdriver/safari';
 
@@ -16,10 +15,12 @@ export class ArtService {
     private _authService: AuthService,
     private _http:Http) { }
 
+  // return all arts of collection
   getArts() {
     return this.http.get<any>(this._artsUrl)
   }
 
+  // return a selected art detail informations
   getArtDetails(artId) {
     let headers = new Headers();
     headers.append('artId', artId);
@@ -28,6 +29,7 @@ export class ArtService {
     return this._http.get(this._detailsUrl, options);
   }
   
+  // return all of user arts collection
   getMyArts() {
     let userId = this._authService.getToken(); 
     let headers = new Headers();
@@ -37,7 +39,7 @@ export class ArtService {
     return this._http.get(this._myArtsUrl, options)
   }
 
-
+  // remove a selected art from collection
   deleteMyArt(art) {
     let artId = art._id;
     let headers = new Headers();
@@ -47,6 +49,7 @@ export class ArtService {
     return this._http.delete(this._detailsUrl, options);
   }
 
+  // change a selected art informations
   editMyArt(art) {
     return this._http.put(this._detailsUrl, art);
   }

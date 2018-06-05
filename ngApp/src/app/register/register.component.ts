@@ -2,31 +2,32 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../services/auth.service";
 import { Router } from "@angular/router"
 
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
 export class RegisterComponent implements OnInit {
 
-  registerUserData = {}
+  registerUserData = {};
+
+
   constructor(private _auth: AuthService,
     private _router: Router) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
+  // Create un new user of the application
   registerUser() {
     this._auth.registerUser(this.registerUserData)
-      .subscribe(        
+      .subscribe(
         res => {
-          console.log(res)
-          let token = res._id
-          localStorage.setItem('local_token',token);
-          this._router.navigate(['/arts'])
+          let token = res._id;
+          localStorage.setItem('local_token', token);
+          this._router.navigate(['/arts']);
         },
-        err => console.log(err)
+        err => alert(err.error)
       )
   }
 }
