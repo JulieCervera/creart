@@ -72,7 +72,7 @@ router.delete('/account', (req, res) => {
 // edit user information
 
 router.put('/account', (req, res) => {
-    User.findOneAndUpdate({ _id: req.body._id }, req.body, function (err, ) {
+    User.findOneAndUpdate({ _id: req.body._id }, req.body, function (err) {
         if (err) res.send(err);
         res.status(201)
     });
