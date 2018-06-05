@@ -15,7 +15,7 @@ export class ArtDetailComponent implements OnInit {
     description: String,
     ville: String,
     _id: String,
-    userId: String,
+    userId: '',
     _v: Number
   }
 
@@ -30,16 +30,24 @@ export class ArtDetailComponent implements OnInit {
     this.art._id = this.route.snapshot.params["id"];
     this._artService.getArtDetails(this.art._id)
       .subscribe(
-      res => this.art = res.json(),
+      res => {this.art = res.json();
+      console.log(this.art);
+      setTimeout(this.verifyUser(this.art), 1500);
+    },
       err => console.log(err)
-      )
-    //   .then(
-    // let userId = this.art.userId;
-    // let currentUserId = this._authService.getToken()
-    // console.log('userId', userId);
-    // console.log('currentUserId', currentUserId);
-    //   )
+      );
   }
+  verifyUser(art) {
+    let userId = art.userId;
+    let currentUserId = this._authService.getToken()
+    console.log('userId', userId);
+    console.log('currentUserId', currentUserId);
+    if (userId == currentUserId) {
+      this.isUserArt = true;
+    } else {
+      this.isUserArt = false;
+    }
+    }
 
   deleteMyArt() {
     this._artService.deleteMyArt(this.art)
