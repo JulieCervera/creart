@@ -23,6 +23,8 @@ router.get('/', (req, res) => {
 });
 
 
+// LOGIN / REGISTER
+
 // Insert new user in database
 router.post('/register', (req, res) => {
     let userData = req.body;
@@ -57,22 +59,28 @@ router.post('/login', (req, res) => {
     })
 })
 
+// USER
+
 // remove user from database
 router.delete('/account', (req, res) => {
     let userId = req.get('userId');
-    User.deleteOne({ _id: userId }, function (err, res) {
+    User.deleteOne({ _id: userId }, function (err) {
         if (err) handleError(err);
         res.status(201);
+        res.end();
     });
 })
 
 // update user information in database
 router.put('/account', (req, res) => {
-    User.findOneAndUpdate({ _id: req.body._id }, req.body, function (err, res) {
+    User.findOneAndUpdate({ _id: req.body._id }, req.body, function (err) {
         if (err) res.send(err);
-        res.status(201)
+        res.status(201);
+        res.end();
     });
 });
+
+// ARTS
 
 // return all arts collection of database
 router.get('/arts', (req, res) => {
@@ -91,6 +99,7 @@ router.get('/myArts', (req, res) => {
     })
 })
 
+// ARTWORK
 
 // upload an image and add picture_path in database
 router.post("/upload", (req, res) => {
@@ -120,7 +129,7 @@ router.put('/upload', (req, res) => {
     console.log('add new artwork', req.body._id);
     Art.findOneAndUpdate({
         _id: req.body._id
-    }, req.body, function (err,res) {
+    }, req.body, function (err) {
         if (err) {
             res.send(err);
         } else {
@@ -145,18 +154,20 @@ router.get('/details', (req, res) => {
 // Delete art entry in database
 router.delete('/details', (req, res) => {
     let id = req.get('artId');
-    Art.remove({ _id: id }, function (err) {
+    console.log(id);
+    Art.deleteOne({ _id: id }, function (err) {
         if (err) return err;
         res.status(201);
+        res.end();
     });
 });
 
 // update art entry in database
 router.put('/details', (req, res) => {
-    console.log('edit artwork', req.body._id);
     Art.findOneAndUpdate({ _id: req.body._id }, req.body, function (err) {
         if (err) res.send(err);
         res.status(201);
+        res.end();
     });
 });
 

@@ -34,7 +34,7 @@ export class AccountComponent implements OnInit {
     this.loginUserData._id = localStorage.getItem('local_token');
     this._auth.editAccount(this.loginUserData)
     .subscribe(
-      res => this._auth.logoutUser(),
+      res => alert('edited'),
       err => alert(err.error)
     )
   }

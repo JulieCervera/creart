@@ -28,6 +28,7 @@ export class UserComponent implements OnInit {
       res => {
         this.myArts = res.json();
         this.displayedArts = this.myArts;
+        console.log(this.displayedArts);
       },
       err => alert(err.error)
     );

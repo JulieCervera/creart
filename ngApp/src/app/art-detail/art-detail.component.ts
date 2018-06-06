@@ -56,7 +56,7 @@ export class ArtDetailComponent implements OnInit {
     this._artService.deleteMyArt(this.art)
       .subscribe(
         res => this.router.navigate(['user']),
-        err => alert(err.error)
+        err => console.log(err)
       );
   }
 
@@ -65,7 +65,8 @@ export class ArtDetailComponent implements OnInit {
     this._artService.editMyArt(this.art)
       .subscribe(
         res => this.router.navigate(['user']),
-        err => alert(err.error)
+        err => console.log(err)
+        
       );
   }
 

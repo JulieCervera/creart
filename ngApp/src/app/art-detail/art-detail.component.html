@@ -1,61 +1,59 @@
-<div class="row" style="height:100%;">
-  <div class="col col-xs-12 col-md-3 p-0" style="height:100%;">
-    <div class="p-0 art-detail d-flex flex-column justify-content-between p-4" style="height: 100%;">
-      <div class="text-center">
-        <h2 class="">{{art.name}}</h2>
-        <h3 class="author">{{art.author | uppercase }}</h3>
-        <h4 class="">Tags : {{art.tags}}</h4>
-        <p class="lead">{{art.address}}, {{art.ville}}</p>
-      </div>
-      <div *ngIf="isUserArt" class="d-flex flex-row justify-content-around mb-4 p-2">
-        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editArt">EDIT</button>
-        <button class="btn btn-danger m-1" type="button" (click)='deleteMyArt()'>
-          DELETE
-        </button>
-      </div>
-      <div class="modal fade" id="editArt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit this artwork</h5>
-                <button type="button" class="btn btn-warning" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                  <form class="form">
-                      <div class="form-group">
-                        <label for="name">Name</label>
-                        <input [(ngModel)]='art.name' type="text" name="name" class="form-control rounded-0" placeholder="name" required>
-                      </div>
-                      <div class="form-group">
-                        <label for="description">Artist</label>
-                        <input [(ngModel)]='art.author' type="text" name="description" placeholder="Artist" class="form-control rounded-0">
-                      </div>
-                      <div class="form-group">
-                          <label for="description">Tags</label>
-                          <input [(ngModel)]='art.tags' type="text" name="description" placeholder="tags" class="form-control rounded-0">
-                        </div>
-                      <div class="form-group">
-                          <label for="description">Spotted</label>
-                          <input [(ngModel)]='art.address' type="text" name="description" placeholder="adress" class="form-control rounded-0">
-                        </div>
-                      <div class="form-group">
-                        <label for="ville">City</label>
-                        <input [(ngModel)]='art.ville' type="text" name="ville" placeholder="City" class="form-control rounded-0">
-                      </div>
-                  </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)='editMyArt()'>Save</button>
-              </div>
-            </div>
-          </div>
-        </div>
+<!-- première div permet de placer le aside en haut de page en version mobile -->
+<div class="d-flex flex-column flex-md-row">
+  <!-- contenu annexe lié au contenu principal de la page -->
+  <aside class="d-flex flex-column justify-content-start align-items-center p-2 col-12 col-md-4">
+    <h2 class="">{{art.name}}</h2>
+    <h3 class="author">{{art.author | uppercase }}</h3>
+    <h4 class="">Tags : {{art.tags}}</h4>
+    <p class="lead">{{art.address}}, {{art.ville}}</p>
+    <div *ngIf="isUserArt" class="d-flex justify-content-around m-5" style="width:100%;">
+      <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editArt">EDIT</button>
+      <button class="btn btn-danger" type="button" (click)='deleteMyArt()'>DELETE</button>
     </div>
-  </div>
-  <div class="col p-0" style="height:100%;">
+  </aside>
+  <!-- div pour le contenu de droite, permet de changer la proportion de remplissage de ce contenu selon la taille de l'écran -->
+  <div class="container col-12 col-md-8 p-0">
     <img class="img-fluid w-100 h-100" [src]="'assets/images/' + art.picture_path" alt="">
   </div>
 </div>
+<div class="modal fade" id="editArt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit this artwork</h5>
+        <button type="button" class="btn btn-warning" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input [(ngModel)]='art.name' type="text" name="name" class="form-control rounded-0" placeholder="name" required>
+          </div>
+          <div class="form-group">
+            <label for="description">Artist</label>
+            <input [(ngModel)]='art.author' type="text" name="description" placeholder="Artist" class="form-control rounded-0">
+          </div>
+          <div class="form-group">
+            <label for="description">Tags</label>
+            <input [(ngModel)]='art.tags' type="text" name="description" placeholder="tags" class="form-control rounded-0">
+          </div>
+          <div class="form-group">
+            <label for="description">Spotted</label>
+            <input [(ngModel)]='art.address' type="text" name="description" placeholder="adress" class="form-control rounded-0">
+          </div>
+          <div class="form-group">
+            <label for="ville">City</label>
+            <input [(ngModel)]='art.ville' type="text" name="ville" placeholder="City" class="form-control rounded-0">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)='editMyArt()'>Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
