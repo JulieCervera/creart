@@ -5,7 +5,7 @@ const formidable = require('formidable');
 const fileUpload = require('express-fileupload');
 
 const mongoose = require('mongoose');
-const db = 'mongodb://user1:test@ds147459.mlab.com:47459/creartdb';
+// const db = 'mongodb://{{user}}:{{password}}@ds147459.mlab.com:47459/creartdb';
 
 const User = require('./models/user');
 const Art = require('./models/artwork');
